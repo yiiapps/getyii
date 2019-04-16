@@ -51,7 +51,7 @@ class DefaultController extends Controller
                     ['allow' => true, 'actions' => ['api', 'view', 'delete'], 'verbs' => ['POST'], 'roles' => ['@']],
                     // 登录用户才能使用API操作(赞,踩,收藏)
                     ['allow' => true, 'actions' => ['create', 'update', 'revoke', 'excellent'], 'roles' => ['@']],
-                ]
+                ],
             ],
         ]);
     }
@@ -70,7 +70,6 @@ class DefaultController extends Controller
             ],
         ];
     }
-
 
     /**
      * 话题列表
@@ -136,7 +135,7 @@ class DefaultController extends Controller
             'pagination' => [
                 'pageSize' => self::PAGE_SIZE,
             ],
-            'sort' => ['defaultOrder' => ['created_at' => SORT_ASC]]
+            'sort' => ['defaultOrder' => ['created_at' => SORT_ASC]],
         ]);
 
         // 文章浏览次数
@@ -144,7 +143,7 @@ class DefaultController extends Controller
 
         //内容页面打赏
         if (in_array($model->category->alias, params('donateNode')) || array_intersect(explode(',', $model->tags),
-                params('donateTag'))) {
+            params('donateTag'))) {
             $donate = Donate::findOne(['user_id' => $model->user_id, 'status' => Donate::STATUS_ACTIVE]);
         }
 
