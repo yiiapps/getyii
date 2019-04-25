@@ -19,11 +19,11 @@ if ($node = Yii::$app->request->getQueryParam('node')) {
             <?php if (request('node')): ?>
                 <div class="node-header">
                     <div class="title">
-                        <?=$node->name;?>
+                        <?php empty($node->name) ? '' : $node->name;?>
                         <span class="total">共有 <?=$dataProvider->getTotalCount();?> 个讨论主题</span>
                     </div>
                     <div class="summary" id="node-summary">
-                        <p><?=$node->description;?></p>
+                        <p><?php empty($node->description) ? '' : $node->description;?></p>
                     </div>
                 </div>
             <?php else: ?>
