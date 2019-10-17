@@ -4,7 +4,7 @@ namespace common\models;
 
 use common\components\db\ActiveRecord;
 use Yii;
-use yii\helpers\ArrayHelper;
+use yiier\antiSpam\SpamValidator;
 
 /**
  * This is the model class for table "post".
@@ -108,7 +108,9 @@ class Post extends ActiveRecord
             [['title'], 'string', 'max' => 50, 'min' => 2],
             [['excerpt', 'image'], 'string', 'max' => 255],
             [['author'], 'string', 'max' => 100],
-            [['cc', 'tags'], 'safe']
+            [['cc', 'tags'], 'safe'],
+            ['content', SpamValidator::className(), 'message' => '请勿发表垃圾内容'],
+            ['title', SpamValidator::className(), 'message' => '请勿发表垃圾内容'],
         ];
     }
 
@@ -133,6 +135,20 @@ class Post extends ActiveRecord
         $newUserPostLimit = params('newUserPostLimit');
         if ($newUserPostLimit && time() - $userCreatedAt < $newUserPostLimit) {
             return $newUserPostLimit - (time() - $userCreatedAt);
+        }
+        return false;
+    }
+
+    /**
+     * 限制发帖间隔
+     * @return bool|int
+     */
+    public function limitPostingIntervalTime()
+    {
+        $lastPostCreatedAt = Post::find()->select('created_at')->where(['type' => self::TYPE_TOPIC])->orderBy(['created_at' => SORT_DESC])->scalar();
+        $postingIntervalLimit = params('postingIntervalLimit');
+        if ($postingIntervalLimit && time() - $lastPostCreatedAt < $postingIntervalLimit) {
+            return $postingIntervalLimit - (time() - $lastPostCreatedAt);
         }
         return false;
     }
