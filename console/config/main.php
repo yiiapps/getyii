@@ -1,9 +1,9 @@
 <?php
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require (__DIR__ . '/../../common/config/params.php'),
+    require (__DIR__ . '/../../common/config/params-local.php'),
+    require (__DIR__ . '/params.php'),
+    require (__DIR__ . '/params-local.php')
 );
 
 return [
@@ -28,11 +28,14 @@ return [
             'identityClass' => 'common\models\User',
             //'enableAutoLogin' => true,
         ],
+        'urlManager' => [
+            'hostInfo' => 'http://b.mygetyii.com:10080',
+        ],
     ],
     'params' => $params,
     'controllerMap' => [
         'backup' => [
             'class' => 'yiier\backup\controllers\BackupController',
-        ]
-    ]
+        ],
+    ],
 ];

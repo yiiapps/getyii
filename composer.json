@@ -25,9 +25,9 @@
     "yiisoft/yii2-swiftmailer": "*",
     "conquer/select2": "*",
     "bower-asset/highlightjs": "*",
-    "bower-asset/PACE": "*",
+    "bower-asset/pace": "*",
     "bower-asset/localforage": "*",
-    "bower-asset/At.js": "*",
+    "bower-asset/at.js": "*",
     "yiisoft/yii2-authclient": "*",
     "yzalis/identicon": "*",
     "funson86/yii2-setting": "*",
@@ -52,9 +52,6 @@
     "yiisoft/yii2-gii": "*",
     "yiisoft/yii2-faker": "*"
   },
-  "config": {
-    "process-timeout": 1800
-  },
   "autoload": {
     "psr-4": {
       "common\\": "common"
@@ -66,18 +63,15 @@
   "scripts": {
     "post-create-project-cmd": [
       "yii\\composer\\Installer::postCreateProject"
-    ],
-    "post-install-cmd": [
-      "common\\components\\ComposerInstaller::initProject"
-    ],
-    "post-update-cmd": [
-      "common\\components\\ComposerInstaller::initProject"
     ]
   },
-  "extra": {
-    "asset-installer-paths": {
-      "npm-asset-library": "vendor/npm",
-      "bower-asset-library": "vendor/bower"
+  "config": {
+    "process-timeout": 1800,
+    "fxp-asset": {
+      "installer-paths": {
+        "npm-asset-library": "vendor/npm",
+        "bower-asset-library": "vendor/bower"
+      }
     }
   }
 }
